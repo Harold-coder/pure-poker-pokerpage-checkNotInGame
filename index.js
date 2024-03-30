@@ -4,20 +4,21 @@ const connectionsTableName = process.env.CONNECTIONS_TABLE;
 
 exports.handler = async (event) => {
     // Assuming the gameId is passed as a path parameter from API Gateway
-    const connectionId = event.requestContext.connectionId;
+    const playerId = event.pathParameters.playerId; // Adjust according to how you receive path parameters
     const requestOrigin = event.headers ? event.headers.origin : "*";
 
-    const params = {
+    const scanParams = {
         TableName: connectionsTableName,
-        Key: {
-            'connectionId': connectionId
-        }
+        FilterExpression: 'playerId = :playerId',
+        ExpressionAttributeValues: {
+            ':playerId': playerId,
+        },
     };
 
     try {
-        const response = await dynamoDb.get(params).promise();
-        if (response.Item) {
-            // We found a connection, we can return it.
+        const response = await dynamoDb.scan(scanParams).promise();
+        if (response.Items.length > 0) {
+            // Assuming you want to return the first match, adjust as necessary
             return {
                 statusCode: 200,
                 headers: {
@@ -25,7 +26,7 @@ exports.handler = async (event) => {
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "OPTIONS,GET"
                 },
-                body: JSON.stringify(response.Item)
+                body: JSON.stringify(response.Items[0]) // Sending back the first matching item
             };
         } else {
             // Couldn't find a connection
