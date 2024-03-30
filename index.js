@@ -4,7 +4,7 @@ const connectionsTableName = process.env.CONNECTIONS_TABLE;
 
 exports.handler = async (event) => {
     // Assuming the gameId is passed as a path parameter from API Gateway
-    const playerId = event.pathParameters.gameId;
+    const playerId = event.pathParameters.playerId;
     const requestOrigin = event.headers ? event.headers.origin : "*";
 
     const params = {
