@@ -1,0 +1,23 @@
+{
+  "name": "poker-getplayerconnection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harold-coder/pure-poker-pokerpage-checkNotInGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harold-coder/pure-poker-pokerpage-checkNotInGame/issues"
+  },
+  "homepage": "https://github.com/Harold-coder/pure-poker-pokerpage-checkNotInGame#readme"
+}
